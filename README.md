@@ -1,3 +1,6 @@
+# NSS, Trinity Christiana, template keeping the below for posterity, fully realize that I should replce the bleow with my own README. 
+# This is just for Google Auth for our Django Server project. 
+
 # React/Next.js Django Auth Template
 
 ## Topics
