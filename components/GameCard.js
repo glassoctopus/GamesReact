@@ -8,7 +8,7 @@ const GameCard = ({
   numberOfPlayers,
   skillLevel,
 }) => (
-  <Card className="text-center">
+  <Card className="text-center" style={{ width: '200px', margin: '10px' }}>
     <Card.Header>{title}</Card.Header>
     <Card.Body>
       <Card.Title>By: {maker}</Card.Title>
