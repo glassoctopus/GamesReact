@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import EventCard from '../components/EventCard';
-import { getEvents } from '../utils/data/gameData';
+import { getEvents } from '../utils/data/eventData';
 
 function Event() {
   const [events, setEvents] = useState([]);
