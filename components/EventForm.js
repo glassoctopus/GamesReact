@@ -41,7 +41,7 @@ const EventForm = ({ id, update }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(`Changing ${name} to ${value}`);
+    // console.log(`Changing ${name} to ${value}`);
     setCurrentEvent((prevState) => ({
       ...prevState,
       [name]: value,
@@ -59,7 +59,7 @@ const EventForm = ({ id, update }) => {
       id: currentEvent.gamer,
     };
 
-    console.log('Submitting event:', event);
+    // console.log('Submitting event:', event);
 
     if (!update) {
       createEvent(event)
