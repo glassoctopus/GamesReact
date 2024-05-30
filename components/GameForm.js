@@ -133,7 +133,7 @@ const GameForm = ({ user, id, update }) => {
             value={currentGame.gameType}
             onChange={handleChange}
           >
-            <option value="">pick the type of game / genre</option>
+            <option value="">Pick the type of game / genre</option>
             {gameTypes.map((gameType) => (
               <option key={gameType.id} value={gameType.id}>
                 {gameType.label}
