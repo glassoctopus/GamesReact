@@ -12,7 +12,7 @@ export default function GameCard({
 }) {
   const deleteThisGame = () => {
     if (window.confirm(`Delete ${title}`)) {
-      console.log('where this should be delete i am testing for id =>', id);
+      // console.log('where this should be delete i am testing for id =>', id);
     }
   };
 

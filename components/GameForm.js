@@ -50,9 +50,9 @@ const GameForm = ({ user, id, update }) => {
     const game = {
       maker: currentGame.maker,
       title: currentGame.title,
-      number_of_players: Number(currentGame.numberOfPlayers),
-      skill_level: Number(currentGame.skillLevel),
-      game_type: Number(currentGame.gameTypeId),
+      numberOfPlayers: Number(currentGame.numberOfPlayers),
+      skillLevel: Number(currentGame.skillLevel),
+      gameTypeId: Number(currentGame.gameTypeId),
       userId: user.uid,
     };
 
@@ -65,7 +65,7 @@ const GameForm = ({ user, id, update }) => {
         });
     } else {
       updateGame(game, id)
-        .then(() => router.push('/games'))
+        .then(() => router.push(`/games/${id}`))
         .catch((error) => {
           console.error('Error updating this game: ', error);
         });
@@ -95,7 +95,6 @@ const GameForm = ({ user, id, update }) => {
               type="text"
               placeholder="Enter a maker"
               name="maker"
-              gameTypeIdgame
               value={currentGame.maker}
               onChange={handleChange}
               required

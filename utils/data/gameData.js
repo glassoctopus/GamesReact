@@ -34,15 +34,14 @@ const getGames = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updateGame = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/games/${payload.id}`, {
+const updateGame = (payload, id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/games/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(payload),
   })
-    .then((response) => response.json())
     .then(() => resolve())
     .catch(reject);
 });
