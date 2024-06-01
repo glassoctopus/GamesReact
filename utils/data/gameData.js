@@ -36,7 +36,7 @@ const getGames = () => new Promise((resolve, reject) => {
 
 const updateGame = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/games/${payload.id}`, {
-    method: 'PATCH',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },

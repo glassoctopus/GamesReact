@@ -10,9 +10,9 @@ import {
 const initialState = {
   title: '',
   maker: '',
-  numberOfPlayers: 0,
-  skillLevel: 1,
-  gameTypeId: 0,
+  numberOfPlayers: '',
+  skillLevel: '',
+  gameTypeId: '',
 };
 
 const GameForm = ({ user, id, update }) => {
@@ -26,9 +26,9 @@ const GameForm = ({ user, id, update }) => {
         setCurrentGame({
           title: data.title,
           maker: data.maker,
-          number_of_players: data.numberOfPlayers,
-          skill_level: data.skillLevel,
-          game_type: data.gameTypeId,
+          numberOfPlayers: data.number_of_players,
+          skillLevel: data.skill_level,
+          gameTypeId: data.game_type.id,
           id,
         });
       });
@@ -64,7 +64,7 @@ const GameForm = ({ user, id, update }) => {
           console.error('Error creating this game: ', error);
         });
     } else {
-      updateGame(game)
+      updateGame(game, id)
         .then(() => router.push('/games'))
         .catch((error) => {
           console.error('Error updating this game: ', error);
@@ -95,6 +95,7 @@ const GameForm = ({ user, id, update }) => {
               type="text"
               placeholder="Enter a maker"
               name="maker"
+              gameTypeIdgame
               value={currentGame.maker}
               onChange={handleChange}
               required
@@ -102,7 +103,7 @@ const GameForm = ({ user, id, update }) => {
           </FloatingLabel>
 
           {/* Number Of Players INPUT  */}
-          <FloatingLabel controlId="floatingInput1" label="numberOfPlayers" className="mb-3">
+          <FloatingLabel controlId="floatingInput1" label="Number Of Players" className="mb-3">
             <Form.Control
               type="text"
               placeholder="Enter the total number of Players"
@@ -114,7 +115,7 @@ const GameForm = ({ user, id, update }) => {
           </FloatingLabel>
 
           {/* skill Level INPUT  */}
-          <FloatingLabel controlId="floatingInput1" label="skillLevel" className="mb-3">
+          <FloatingLabel controlId="floatingInput1" label="Skill Level" className="mb-3">
             <Form.Control
               type="text"
               placeholder="Enter a skill Level value 1-10"
@@ -130,7 +131,7 @@ const GameForm = ({ user, id, update }) => {
           <Form.Select
             name="gameTypeId"
             required
-            value={currentGame.gameType}
+            value={currentGame.gameTypeId}
             onChange={handleChange}
           >
             <option value="">Pick the type of game / genre</option>

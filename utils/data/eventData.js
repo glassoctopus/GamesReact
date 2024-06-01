@@ -27,9 +27,9 @@ const getSingleEvent = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updateEvent = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/events/${payload.id}`, {
-    method: 'PATCH',
+const updateEvent = (payload, id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/events/${id}`, {
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
