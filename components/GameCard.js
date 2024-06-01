@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Link from 'next/link';
 import { Card, Button } from 'react-bootstrap';
+import { useRouter } from 'next/router';
+import { deleteGame } from '../utils/data/gameData';
 
 export default function GameCard({
   title, //
@@ -10,9 +12,13 @@ export default function GameCard({
   skillLevel,
   id,
 }) {
+  const router = useRouter();
+
   const deleteThisGame = () => {
     if (window.confirm(`Delete ${title}`)) {
-      // console.log('where this should be delete i am testing for id =>', id);
+      deleteGame(id);
+      window.location.reload();
+      router.push('/games');
     }
   };
 

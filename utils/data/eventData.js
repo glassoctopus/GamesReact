@@ -57,6 +57,17 @@ const getEvents = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const deleteEvent = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/events/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((data) => resolve((data)))
+    .catch(reject);
+});
+
 const getGamers = () => new Promise((resolve, reject) => {
   fetch(`${endpoint}/gamers`, {
     method: 'GET',
@@ -95,5 +106,5 @@ const getGamer = (id) => new Promise((resolve, reject) => {
 
 // eslint-disable-next-line import/prefer-default-export
 export {
-  createEvent, getSingleEvent, updateEvent, getEvents, getGamers, getGamer,
+  createEvent, getSingleEvent, updateEvent, getEvents, getGamers, getGamer, deleteEvent,
 };
