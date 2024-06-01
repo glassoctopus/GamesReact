@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Link from 'next/link';
 import { Card, Button } from 'react-bootstrap';
+import { useRouter } from 'next/router';
+import { deleteEvent } from '../utils/data/eventData';
 
 export default function EventCard({
   gameTitle,
@@ -11,9 +13,13 @@ export default function EventCard({
   gamer,
   id,
 }) {
+  const router = useRouter();
+
   const deleteThisEvent = () => {
     if (window.confirm(`Delete ${description}`)) {
-      // console.log('we should be deleting this event soon.');
+      deleteEvent(id);
+      window.location.reload();
+      router.push('/events');
     }
   };
 
