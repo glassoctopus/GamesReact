@@ -24,7 +24,7 @@ function Event() {
       </Button>
       {events.map((event) => (
         <section key={`event--${event.id}`} className="event">
-          <EventCard gameTitle={event.gameTitle} description={event.description} date={event.date} time={event.time} gamer={event.gamer} />
+          <EventCard gameTitle={event.gameTitle} description={event.description} date={event.date} time={event.time} gamer={event.gamer} id={event.id} />
         </section>
       ))}
     </article>

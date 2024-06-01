@@ -18,7 +18,7 @@ const initialState = {
 
 const EventForm = ({ id, update }) => {
   const [currentGame, setCurrentGame] = useState([]);
-  const [currentEventOrganizer, setCurrentEventOrganizer] = useState([]);
+  const [gamers, setGamers] = useState([]);
   const [currentEvent, setCurrentEvent] = useState(initialState);
   const router = useRouter();
 
@@ -26,16 +26,16 @@ const EventForm = ({ id, update }) => {
     if (update) {
       getSingleEvent(id).then((data) => {
         setCurrentEvent({
-          game: data.game,
+          game: data.game.id,
           description: data.description,
           date: data.date,
           time: data.time,
-          gamer: data.gamer,
+          gamer: data.organizer.id,
           id,
         });
       });
     }
-    getGamers().then(setCurrentEventOrganizer);
+    getGamers().then(setGamers);
     getGames().then(setCurrentGame);
   }, [id, update]);
 
@@ -52,11 +52,11 @@ const EventForm = ({ id, update }) => {
     e.preventDefault();
 
     const event = {
-      game: currentEvent.game,
+      title: currentEvent.game,
       description: currentEvent.description,
       date: currentEvent.date,
       time: currentEvent.time,
-      id: currentEvent.gamer,
+      uid: currentEvent.gamer,
     };
 
     // console.log('Submitting event:', event);
@@ -68,8 +68,8 @@ const EventForm = ({ id, update }) => {
           console.error('Error creating this event: ', error);
         });
     } else {
-      updateEvent(event)
-        .then(() => router.push('/events'))
+      updateEvent(event, id)
+        .then(() => router.push(`/events/${id}`))
         .catch((error) => {
           console.error('Error updating this event: ', error);
         });
@@ -101,9 +101,9 @@ const EventForm = ({ id, update }) => {
             onChange={handleChange}
           >
             <option value="">Please select the game</option>
-            {Object.keys(currentGame).map((key) => (
-              <option key={key} value={key}>
-                {currentGame[key].title}
+            {(currentGame).map((game) => (
+              <option key={game.id} value={game.id}>
+                {game.title}
               </option>
             ))}
           </Form.Select>
@@ -140,9 +140,9 @@ const EventForm = ({ id, update }) => {
             onChange={handleChange}
           >
             <option value="">Please select the organizer</option>
-            {Object.keys(currentEventOrganizer).map((key) => (
-              <option key={key} value={key}>
-                {currentEventOrganizer[key].bio}
+            {gamers.map((organizer) => (
+              <option key={organizer.id} value={organizer.id}>
+                {organizer.bio}
               </option>
             ))}
           </Form.Select>
@@ -157,9 +157,6 @@ const EventForm = ({ id, update }) => {
 };
 
 EventForm.propTypes = {
-  user: PropTypes.shape({
-    uid: PropTypes.string.isRequired,
-  }).isRequired,
   id: PropTypes.number,
   update: PropTypes.bool,
 };
