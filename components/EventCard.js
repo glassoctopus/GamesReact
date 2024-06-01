@@ -13,7 +13,7 @@ export default function EventCard({
 }) {
   const deleteThisEvent = () => {
     if (window.confirm(`Delete ${description}`)) {
-      console.log('we should be deleting this event soon.');
+      // console.log('we should be deleting this event soon.');
     }
   };
 
