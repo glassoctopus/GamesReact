@@ -35,7 +35,6 @@ const updateEvent = (payload, id) => new Promise((resolve, reject) => {
     },
     body: JSON.stringify(payload),
   })
-    .then((response) => response.json())
     .then(() => resolve())
     .catch(reject);
 });
