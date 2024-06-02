@@ -3,14 +3,16 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import EventCard from '../../components/EventCard';
 import { getEvents } from '../../utils/data/eventData';
+import { useAuth } from '../../utils/context/authContext';
 
 function Event() {
   const [events, setEvents] = useState([]);
   const router = useRouter();
+  const { user } = useAuth();
 
   useEffect(() => {
-    getEvents().then((data) => setEvents(data));
-  }, []);
+    getEvents(user.uid).then((data) => setEvents(data));
+  }, [user]);
 
   return (
     <article className="event">
@@ -24,7 +26,7 @@ function Event() {
       </Button>
       {events.map((event) => (
         <section key={`event--${event.id}`} className="event">
-          <EventCard gameTitle={event.gameTitle} description={event.description} date={event.date} time={event.time} gamer={event.gamer} id={event.id} />
+          <EventCard gameTitle={event.gameTitle} description={event.description} date={event.date} time={event.time} gamer={event.gamer} id={event.id} joined={event.joined} />
         </section>
       ))}
     </article>

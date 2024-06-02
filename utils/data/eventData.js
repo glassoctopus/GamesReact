@@ -39,8 +39,12 @@ const updateEvent = (payload, id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getEvents = () => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/events`)
+const getEvents = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/events`, {
+    headers: {
+      Authorization: uid,
+    },
+  })
     .then((response) => response.json())
     .then((data) => {
       // Extract the necessary fields from nested objects
@@ -51,6 +55,7 @@ const getEvents = () => new Promise((resolve, reject) => {
         time: event.time,
         gameTitle: event.game.title,
         gamer: event.organizer.bio,
+        joined: event.joined,
       }));
       resolve(events);
     })
@@ -65,6 +70,32 @@ const deleteEvent = (id) => new Promise((resolve, reject) => {
     },
   })
     .then((data) => resolve((data)))
+    .catch(reject);
+});
+
+const joinEvent = (eventId, payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/events/{id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const leaveEvent = (eventId, payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/events/${eventId}/leave`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
     .catch(reject);
 });
 
@@ -106,5 +137,5 @@ const getGamer = (id) => new Promise((resolve, reject) => {
 
 // eslint-disable-next-line import/prefer-default-export
 export {
-  createEvent, getSingleEvent, updateEvent, getEvents, getGamers, getGamer, deleteEvent,
+  createEvent, getSingleEvent, updateEvent, getEvents, getGamers, getGamer, deleteEvent, joinEvent, leaveEvent,
 };
